@@ -2,6 +2,8 @@ const User =require('../model/user')
 
 module.exports.createUser=async (req,res)=>{  //it is post request 
     console.log('data recieved',req.body)
+    const reqq = req.body.json()
+    console.log('req.___',reqq)
     const isduplicate =await  User.findOne({mobile:req.body.mobile});
     console.log('isduplicate',isduplicate)
     if(!isduplicate){
@@ -37,7 +39,7 @@ module.exports.login=async (req,res)=>{  //post request
         })
     }
 
-    return res.status(200).json({
+    return res.status(444).json({
         error:'user with given mobile number doesnot exists'
     })
 }

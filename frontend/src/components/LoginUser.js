@@ -4,46 +4,66 @@ import './loginUser.css'
 function LoginUser() {
 
   const [mobile, setMobile] = useState('')
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState('')  
+  const [loggeIn,setLoggedIn] =useState(false)
+  const [userData,setUserData]=useState()
 
 
-  function handleLogin(e){
+  async function handleLogin(e){
     e.preventDefault()
 
     console.log('inside handlefunction')
     const SERVERURL ='http://localhost:8001/'
-    fetch(`${SERVERURL}login-user`,{
-        mode:'no-cors',
+
+    if(mobile&&password){
+      const response =await fetch(`${SERVERURL}login-user`,{
         method:'POST',
-        body:JSON.stringify({mobile,password}),
-        headers:
-        {
+        headers:{
             'Content-type': 'application/json; charset=UTF-8'
-        }
+        },
+        body:JSON.stringify({mobile,password})        
     })
-    .then(res=>{return res.json()})
-        .then(data=>{
-           console.log('data recieved is',data)
-        })
+    console.log(response.status)
+    const data = await response.json()  
+    console.log('data recieved is',data)
+    if(response.status===200){
+      setLoggedIn(true)
+      setUserData(data.user)
+      return;
+    }
+    }
+    alert('Enter mobile and password')
+  }
+
+  function loggedInUser(){
+   return (
+    <div>
+      <span>User : </span>
+      <span>{userData}</span>  
+    </div>
+   )
 
   }
-  
+
     
   return (
     <div className='login-wrapper'>
-        <form className='form-components'>
-            <input type='text'     
-                    className='inputbox'      
-                    placeholder='Enter Mobile Number' 
-                    onChange={(e)=>{setMobile(e.target.value)}} />
-            
-            <input type='password' 
-                    className='inputbox'      
-                    placeholder='Enter Password' 
-                    onChange={(e)=>{setPassword(e.target.value)}}/>
-            
-            <input type='submit'   className='submit-button' onClick={handleLogin} c/>
-        </form>
+
+        {loggeIn?loggedInUser():
+          <form className='form-components'>
+              <input type='text'     
+                      className='inputbox'      
+                      placeholder='Enter Mobile Number' 
+                      onChange={(e)=>{setMobile(e.target.value)}} />
+              
+              <input type='password' 
+                      className='inputbox'      
+                      placeholder='Enter Password' 
+                      onChange={(e)=>{setPassword(e.target.value)}}/>
+              
+              <input type='submit'   className='submit-button' onClick={handleLogin}/>
+          </form>
+        }
 
     </div>
   )
