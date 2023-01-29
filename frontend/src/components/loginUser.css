@@ -1,0 +1,22 @@
+.login-wrapper{
+    margin: auto;
+    
+}
+.form-components{
+    display: flex;
+    flex-direction: column;
+    width:30%;
+    margin:auto;
+    margin-top: 15%;
+    padding: 5px;
+}
+
+.inputbox{
+    margin-bottom: 8px;
+    padding:8px ;
+}
+.submit-button{
+    width:30%;
+    margin:auto;
+    margin-top: 8px;
+}
