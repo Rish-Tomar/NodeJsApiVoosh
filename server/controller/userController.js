@@ -37,7 +37,7 @@ module.exports.login=async (req,res)=>{  //post request
         })
     }
 
-    return res.status(404).json({
+    return res.status(200).json({
         error:'user with given mobile number doesnot exists'
     })
 }
@@ -48,16 +48,16 @@ module.exports.addOrder =async(req,res)=>{
     const findUser=await User.findOne({mobile:req.body.mobile});
     if(findUser){
         const currentorders =findUser.orders.length
-        if(currentorders===null){
+        if(currentorders==null){
             const id=1
         }
         else{
             const id=currentorders+1;
-            currentorders.orders.push({id,subTotal:req.body.subTotal})
-            currentorders.save()
+            findUser.orders.push({id,subTotal:req.body.subTotal})
+            findUser.save()
         }
         return res.status(200).json({
-            message:'orer-created'
+            message:'order-created'
         })
     }
 

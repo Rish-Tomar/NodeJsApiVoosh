@@ -3,7 +3,7 @@
 
 module.exports.default = function(req,res){
 
-    console.log('recieved req',req)
+    console.log('recieved req')
     return res.status(200).json({
         message:'U have entered the default entry address',
         use_these:{

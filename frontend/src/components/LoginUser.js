@@ -26,24 +26,6 @@ function LoginUser() {
            console.log('data recieved is',data)
         })
 
-
-    // fetch('http://localhost:8001/login-user',{
-    //     mode:'no-cors',
-    //     method:'post',
-    //     body:JSON.stringify({mobile,password}),
-    //     headers:
-    //         {
-    //             'Content-type': 'application/json; charset=UTF-8'
-    //         }
-    // })
-    // .then(res=>{
-    //     console.log('response is',res)
-    //     return res.json()
-    // })
-    // .then(data=>{
-    //     console.log('data json',data)
-    // })
-
   }
   
     
